@@ -44,7 +44,7 @@ export default async function handler(
 
     console.log('Processing rows into tools');
     // Skip the header row
-    const tools: Tool[] = rows.slice(1).map((row: any) => {
+    const tools: Tool[] = rows.slice(1).map((row: string[]) => {
       const website = row[1] || '';
       return {
         name: row[0] || '',

@@ -21,11 +21,12 @@ type Tool = {
 
 export default function ToolPage() {
   const params = useParams()
-  const slug = params.slug as string
+  const slug = params?.slug as string | undefined
   const [tool, setTool] = useState<Tool | null>(null);
 
   useEffect(() => {
     async function fetchTool() {
+      if (!slug) return;
       try {
         const response = await fetch('/api/getTools');
         if (!response.ok) {
@@ -41,6 +42,10 @@ export default function ToolPage() {
 
     fetchTool();
   }, [slug]);
+
+  if (!slug) {
+    return <div>Invalid tool</div>;
+  }
 
   if (!tool) {
     return <div>Loading...</div>;

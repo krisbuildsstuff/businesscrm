@@ -17,12 +17,12 @@ type Tool = {
   categories: string[];
   email: string;
   published: boolean;
+  slug: string;
 };
 
 export default function DirectoryPageComponent() {
   const [tools, setTools] = useState<Tool[]>([]);
   const [filteredTools, setFilteredTools] = useState<Tool[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const categories = ["Sales", "Marketing", "Support", "HR"];
 
@@ -44,13 +44,13 @@ export default function DirectoryPageComponent() {
     fetchTools();
   }, []);
 
-  useEffect(() => {
-    if (selectedCategory) {
-      setFilteredTools(tools.filter(tool => tool.categories.includes(selectedCategory)));
+  const handleCategoryFilter = (category: string | null) => {
+    if (category) {
+      setFilteredTools(tools.filter(tool => tool.categories.includes(category)));
     } else {
       setFilteredTools(tools);
     }
-  }, [selectedCategory, tools]);
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -72,11 +72,11 @@ export default function DirectoryPageComponent() {
           <ScrollArea className="h-[calc(100vh-12rem)]">
             <ul>
               <li className="py-2 hover:bg-gray-100 cursor-pointer">
-                <Link href="/">All</Link>
+                <Link href="/" onClick={() => handleCategoryFilter(null)}>All</Link>
               </li>
               {categories.map((category, index) => (
                 <li key={index} className="py-2 hover:bg-gray-100 cursor-pointer">
-                  <Link href={`/category/${category.toLowerCase()}`}>{category}</Link>
+                  <Link href={`/category/${category.toLowerCase()}`} onClick={() => handleCategoryFilter(category)}>{category}</Link>
                 </li>
               ))}
             </ul>

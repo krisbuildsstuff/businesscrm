@@ -16,15 +16,17 @@ type Tool = {
   categories: string[];
   email: string;
   published: boolean;
+  slug: string;
 };
 
 export default function CategoryPage() {
   const params = useParams()
-  const category = params.category as string
+  const category = params?.category as string | undefined
   const [tools, setTools] = useState<Tool[]>([]);
 
   useEffect(() => {
     async function fetchTools() {
+      if (!category) return;
       try {
         const response = await fetch('/api/getTools');
         if (!response.ok) {
@@ -42,6 +44,10 @@ export default function CategoryPage() {
 
     fetchTools();
   }, [category]);
+
+  if (!category) {
+    return <div>Invalid category</div>;
+  }
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -65,18 +71,19 @@ export default function CategoryPage() {
                       onClick={() => window.open(`https://${tool.website}`, '_blank', 'noopener,noreferrer')}
                     >
                       <ExternalLink size={14} />
-                      Visit
+                      Visit Website
                     </Button>
                   </div>
                   <CardTitle className="mt-4">{tool.name}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="mb-4">{tool.description}</CardDescription>
-                  <div className="flex flex-wrap gap-2">
-                    {tool.categories.map((cat, catIndex) => (
-                      <Badge key={catIndex} variant="secondary">{cat}</Badge>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {tool.categories.map((cat, index) => (
+                      <Badge key={index} variant="secondary">{cat}</Badge>
                     ))}
                   </div>
+                  <p><strong>Email:</strong> {tool.email}</p>
                 </CardContent>
               </Card>
             ))
