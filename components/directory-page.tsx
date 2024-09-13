@@ -96,7 +96,7 @@ export default function DirectoryPageComponent() {
             >
               + Submit CRM
             </Button>
-            <Button variant="outline" className="flex items-center gap-2">
+            <Button variant="outline" className="flex items-center gap-2" onClick={() => window.open('https://refined.so/compose', '_blank', 'noopener,noreferrer')}>
               <Mail size={16} />
               Receive New Tools
             </Button>

@@ -27,7 +27,10 @@ export default async function handler(
     const sheetName = 'Sheet1';
     const range = 'D:J'; // Range covering all columns from D to J
 
-    const apiKey = 'AIzaSyDYa0rYf0Sib7PmxP5QndHd81-xsDorO-0';
+    const apiKey = process.env.GOOGLE_SHEETS_API_KEY;
+    if (!apiKey) {
+      throw new Error('GOOGLE_SHEETS_API_KEY is not set in environment variables');
+    }
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}!${range}?key=${apiKey}`;
     console.log('URL constructed:', url);
 
