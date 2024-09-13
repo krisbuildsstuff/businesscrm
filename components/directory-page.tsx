@@ -54,8 +54,10 @@ export default function DirectoryPageComponent() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="text-white p-2 text-center">
-        <span className="text-red-500">🔥 Spotlight:</span> Easy Folders: Browser extension to boost productivity in ChatGPT & Claude.
+      <header className="p-2 text-center">
+        <a href="https://teamopipe.com" target="_blank" rel="noopener noreferrer" className="hover:underline">
+          <span className="text-red-500">🔥 Spotlight:</span>Teamopipe CRM Best CRM for Gmail
+        </a>
       </header>
       <nav className="bg-white border-b p-4 flex justify-between items-center">
         <h1 className="text-2xl font-bold">businesscrm.blog</h1>
