@@ -46,22 +46,24 @@ export default async function handler(
     }
 
     console.log('Processing rows into tools');
-    // Skip the header row
-    const tools: Tool[] = rows.slice(1).map((row: string[]) => {
-      const website = row[1] || '';
-      return {
-        name: row[0] || '',
-        website: website,
-        description: row[2] || '',
-        logo: row[3] || '',
-        categories: row[4] ? row[4].split(',').map((cat: string) => cat.trim()) : [],
-        email: row[5] || '',
-        published: true,
-        slug: slugify(website.split('.')[0]) // Create slug from the first part of the domain
-      };
-    });
+    // Skip the header row and filter published tools
+    const tools: Tool[] = rows.slice(1)
+      .map((row: string[]) => {
+        const website = row[1] || '';
+        return {
+          name: row[0] || '',
+          website: website,
+          description: row[2] || '',
+          logo: row[3] || '',
+          categories: row[4] ? row[4].split(',').map((cat: string) => cat.trim()) : [],
+          email: row[5] || '',
+          published: row[6] === 'TRUE', // Assuming 'TRUE' or 'FALSE' string in the sheet
+          slug: slugify(website.split('.')[0]) // Create slug from the first part of the domain
+        };
+      })
+      .filter((tool: Tool) => tool.published);
 
-    console.log('Processed tools:', tools);
+    console.log('Processed published tools:', tools);
     res.status(200).json(tools);
   } catch (error) {
     console.error('Error fetching tools:', error);
