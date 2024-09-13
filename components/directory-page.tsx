@@ -56,7 +56,7 @@ export default function DirectoryPageComponent() {
     <div className="flex flex-col min-h-screen">
       <header className="p-2 text-center">
         <a href="https://teamopipe.com" target="_blank" rel="noopener noreferrer" className="hover:underline">
-          <span className="text-red-500">🔥 Spotlight:</span>Teamopipe CRM Best CRM for Gmail
+          <span className="text-red-500">🔥 Spotlight:</span>Teamopipe - Best CRM for Gmail
         </a>
       </header>
       <nav className="bg-white border-b p-4 flex justify-between items-center">
@@ -86,7 +86,7 @@ export default function DirectoryPageComponent() {
         </aside>
         <main className="flex-1 p-6">
           <h2 className="text-3xl font-bold mb-6">Supercharge Yourself And Your Business</h2>
-          <p className="text-xl mb-8">Discover 6500+ tools for social media, no-code app building, automation, and more on businesscrm.blog.</p>
+          <p className="text-xl mb-8">Discover top CRM tools to elevate your customer relationships and streamline business processes at businesscrm.blog</p>
           <div className="relative mb-8">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <Input className="pl-10" placeholder="Search tool by name" />
